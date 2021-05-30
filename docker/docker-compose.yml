@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    acervo:
+        container_name: acervo
+        image: mysql:8
+        # build: ./mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=acervo
+            - MYSQL_USER=acervo
+            - MYSQL_PASSWORD=acervo
+            - MYSQL_DATABASE=acervo
+        ports:
+            - 3306:3306
