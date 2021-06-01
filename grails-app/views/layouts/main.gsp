@@ -15,52 +15,42 @@
 </head>
 
 <body>
+<header class="header mb-4" style="height: 100px !important;">
+        <nav class="mh-100 navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation" style="height: 100px !important;">
+            <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
+            <g:link class="navbar-brand media mt-3" action="index"><asset:image class="img-fluid" src="livros.jpeg" alt="livros" width= "100" height="50"/></g:link>
+                <ul class="nav navbar-nav ml-auto">
+                    <li><g:link controller="livro" action="index">Livros</g:link></li>
+                    <li><g:link controller="categoria" action="index">Categorias</g:link></li>
+                    <li><g:link controller="emprestimo" action="index">Emprestimos</g:link></li>
+                    <li><g:link controller="autor" action="index">Autores</g:link></li>
+                    <li><g:link controller="usuario" action="index">Usuarios</g:link></li>
+                </ul>
+            </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
-        <ul class="nav navbar-nav ml-auto">
-            <li><g:link controller="categoria" action="index">Categorias</g:link></li>
-            <li><g:link controller="emprestimo" action="index">Emprestimos</g:link></li>
-            <li><g:link controller="autor" action="index">Autores</g:link></li>
-            <li><g:link controller="usuario" action="index">Usuarios</g:link></li>
-        </ul>
-    </div>
-
-</nav>
+        </nav>
+</header>
 
 <g:layoutBody/>
 
-<div class="footer row" role="contentinfo">
-    <div class="col">
-        <a href="http://guides.grails.org" target="_blank">
-            <asset:image src="advancedgrails.svg" alt="Grails Guides" class="float-left"/>
-        </a>
-        <strong class="centered"><a href="http://guides.grails.org" target="_blank">Grails Guides</a></strong>
-        <p>Building your first Grails app? Looking to add security, or create a Single-Page-App? Check out the <a href="http://guides.grails.org" target="_blank">Grails Guides</a> for step-by-step tutorials.</p>
-
-    </div>
-    <div class="col">
-        <a href="http://docs.grails.org" target="_blank">
-            <asset:image src="documentation.svg" alt="Grails Documentation" class="float-left"/>
-        </a>
-        <strong class="centered"><a href="http://docs.grails.org" target="_blank">Documentation</a></strong>
-        <p>Ready to dig in? You can find in-depth documentation for all the features of Grails in the <a href="http://docs.grails.org" target="_blank">User Guide</a>.</p>
-
-    </div>
-
-    <div class="col">
-        <a href="https://grails-slack.cfapps.io" target="_blank">
-            <asset:image src="slack.svg" alt="Grails Slack" class="float-left"/>
-        </a>
-        <strong class="centered"><a href="https://grails-slack.cfapps.io" target="_blank">Join the Community</a></strong>
-        <p>Get feedback and share your experience with other Grails developers in the community <a href="https://grails-slack.cfapps.io" target="_blank">Slack channel</a>.</p>
-    </div>
-</div>
+<footer class="footer column mt-4" role="contentinfo" style="max-height: 100px !important;">
+        <nav class="mh-100 navbar navbar-expand-lg navbar-dark" role="navigation" style="max-height: 80px !important;">
+            <div></div>    
+            <div class="row">
+                <h3 class="m-0 mx-auto m">Redes sociais</h3>
+                <div class="row">
+                    <g:link class="navbar-brand media" uri="www.linkedin.com/in/renan-ribeiro-b1368872/" base="http://"><asset:image class="img-fluid m-0 p-0" src="linkedin-svgrepo-com.svg" alt="linkedin" width= "30" height="30"/></g:link>
+                    <g:link class="navbar-brand media" uri="github.com/kusmin" base="http://"><asset:image class="img-fluid m-0 p-0" src="iconmonstr-github-1.svg" alt="github" width= "30" height="30"/></g:link>
+                    <g:link class="navbar-brand media" uri="m.facebook.com/renan.lage.54" base="http://"><asset:image class="img-fluid m-0 p-0" src="facebook_108044.svg" alt="facebook" width= "30" height="30"/></g:link>
+                    <g:link class="navbar-brand media" uri="www.instagram.com/renan.lagee/" base="http://"><asset:image class="img-fluid m-0 p-0" src="instagram_108043.svg" alt="instagram" width= "30" height="30"/></g:link>
+                    <g:link class="navbar-brand media" uri="api.whatsapp.com/send?phone=5531989791428&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Te%20vi%20no%20http%3A%2F%2Fblogdopensadormoderno.com.br%2F" base="http://"><asset:image class="img-fluid m-0 p-0" src="whatsapp_108042.svg" alt="whatsapp" width= "30" height="30"/></g:link>
+                    <g:link class="navbar-brand media" uri="www.youtube.com/channel/UCfVcQjS_9l8EbWKkp8R8ysQ" base="http://"><asset:image class="img-fluid m-0 p-0" src="youtube_108041.svg" alt="youtube" width= "30" height="30"/></g:link>
+                <div>
+            </div>
+        </nav>
+</footer>
 
 
-<div id="spinner" class="spinner" style="display:none;">
-    <g:message code="spinner.alt" default="Loading&hellip;"/>
-</div>
 
 <asset:javascript src="application.js"/>
 
