@@ -18,7 +18,7 @@
 <header class="header mb-4" style="height: 100px !important;">
         <nav class="mh-100 navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation" style="height: 100px !important;">
             <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
-            <g:link class="navbar-brand media mt-3" action="index"><asset:image class="img-fluid" src="livros.jpeg" alt="livros" width= "100" height="50"/></g:link>
+            <g:link class="navbar-brand media mt-3" url="/" ><asset:image class="img-fluid" src="livros.jpeg" alt="livros" width= "100" height="50"/></g:link>
                 <ul class="nav navbar-nav ml-auto">
                     <li><g:link controller="livro" action="index">Livros</g:link></li>
                     <li><g:link controller="categoria" action="index">Categorias</g:link></li>

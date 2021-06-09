@@ -13,3 +13,7 @@
 *= require mobile
 *= require_self
 */
+
+.novoLivro {
+    background-image: url(../images/novoLivro);
+}
