@@ -7,7 +7,7 @@ class Livro {
     String descricao
     int codigo
     LocalDate dataCadastro = LocalDate.now()
-    String foto
+    Byte foto
 
     String toString(){
         this.titulo
@@ -22,10 +22,10 @@ class Livro {
         descricao nullable:true, blank:true
         codigo nullable:false, blank:false, unique:true, maxSize:64
         dataCadastro nullable:false, blank:false
-        foto nullable:true, blank:true 
+        foto nullable:true, blank:true, maxSize: 1024 * 1024 * 2 
     }
 
     static mapping = {
-        table 'livros'
+        table 'livro'
     }
 }

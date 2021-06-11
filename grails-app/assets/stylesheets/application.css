@@ -15,5 +15,14 @@
 */
 
 .novoLivro {
-    background-image: url(../images/novoLivro);
+    background-image: url(../images/novoLivro.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: antiquewhite;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.novoLivro:hover {
+    background-color: aliceblue;
 }
