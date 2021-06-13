@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 class LivroController {
 
     LivroService livroService
+    LivroDataService livroDataService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -43,6 +44,54 @@ class LivroController {
             '*' { respond livro, [status: CREATED] }
         }
     }
+
+    def editImage(Long id) {
+    Livro livro = livroDataService.get(id)
+    if (!livro) {
+        notFound()
+    }
+    [livro: livro]
+    }
+
+    def uploadImage(FeaturedImageCommand image){
+        if(image == null){
+            notFound()
+            return
+        }
+        if(image.hasErrors()){
+            respond(image.errors, model:[livro: image], view: 'editImage')
+        }
+
+        Livro livro = livroDataService.update(
+                image.id,
+                image.version,
+                image.featuredImageFile.bytes,
+                image.featuredImageFile.contentType
+            )
+            if(image == null){
+            notFound()
+            return
+        }
+        if(livro.hasErrors()){
+            respond(livro.errors, model:[livro: livro], view: 'editImage')
+        }
+
+        Locale locale = request.locale
+        ​redirect(controller: "livro", action: "index")
+    }
+
+    def featuredImage(Long id) {
+    Livro livro = livroDataService.get(id)
+    if (!livro || livro.capaByte == null) {
+        notFound()
+        return
+    }
+    log.info "${livro.capaByte}"
+    log.info "${livro.capaString}"
+
+    render file: livro.capaByte,
+        contentType: livro.capaString
+}
 
     def edit(Long id) {
         respond livroService.get(id)

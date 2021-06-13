@@ -26,15 +26,14 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.livro}" method="PUT">
+            <g:uploadForm name="uploadImage" action="uploadImage">
+                <g:hiddenField name="id" value="${this.livro?.id}" />
                 <g:hiddenField name="version" value="${this.livro?.version}" />
-                <fieldset class="form">
-                    <f:all bean="livro" except="capaByte,contracapaByte,capaString,contracapaString"/>
-                </fieldset>
+                <input type="file" name="featuredImageFile" />
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="save" type="submit" value="${message(code: 'restaurant.featuredImage.upload.label', default: 'Upload')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>
