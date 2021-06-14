@@ -14,6 +14,7 @@ class AutorController {
         params.max = Math.min(max ?: 10, 100)
         respond autorService.list(params), model:[autorCount: autorService.count()]
     }
+    
 
     def show(Long id) {
         respond autorService.get(id)

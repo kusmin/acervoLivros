@@ -2,6 +2,8 @@ package acervolivros
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
+
 
 class UsuarioController {
 
@@ -16,6 +18,22 @@ class UsuarioController {
 
     def show(Long id) {
         respond usuarioService.get(id)
+    }
+
+    def buscar(){
+        if(!params.nome){
+            def error = ["Erro": "Escolha uma opção de busca"]
+            render error as JSON
+            return
+        }
+
+        def resultado = Usuario.withCriteria(max:10, offset: 10){
+            if(params.nome){
+                ilike "nome","%${params.nome}%"
+            }
+            order "nome", "asc"
+        }
+        render resultado as JSON
     }
 
     def create() {
