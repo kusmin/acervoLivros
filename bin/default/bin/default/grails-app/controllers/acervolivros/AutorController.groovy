@@ -24,7 +24,24 @@ class AutorController {
         respond new Autor(params)
     }
 
-    
+    def buscar(){
+        if(!params.nome && !params.bibliografia){
+            def error = ["Erro": "Escolha uma opção de busca"]
+            render error as JSON
+            return
+        }
+
+        def resultado = Autor.withCriteria(max:10, offset: 10){
+            if(params.nome){
+                ilike "nome","%${params.nome}%"
+            }
+            if(params.bibliografia){
+                ilike "bibliografia","%${params.bibliografia}%"
+            }
+            order "nome", "asc"
+        }
+        render resultado as JSON
+    }
 
     // def upload() {
     //     def f = request.getFile('foto')

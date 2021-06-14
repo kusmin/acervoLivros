@@ -29,7 +29,8 @@ class LivroController {
     
 
     def calcularTempoCadastro(Long id){
-
+        def livro = Livro.get(id)
+        render livro as JSON
     }
 
     def save(Livro livro) {
@@ -54,7 +55,7 @@ class LivroController {
         }
     }
 
-    def busca(){
+    def buscar(){
         if(!params.titulo && !params.descricao && !params.codigo){
             def error = ["Erro": "Escolha uma opção de busca"]
             render error as JSON
