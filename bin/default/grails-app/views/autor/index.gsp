@@ -18,7 +18,7 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${autorList}" />
+            <f:table collection="${autorList}" properties="nome,bibliografia" />
 
             <div class="pagination">
                 <g:paginate total="${autorCount ?: 0}" />

@@ -23,13 +23,12 @@ class CategoriaController {
         respond new Categoria(params)
     }
 
-    def buscar(def params){
-        def busca = Categoria.createCriteria()
-        def resultado - busca.list(max:10, offset: 10){
+    def buscar(){
+        def resultado = Categoria.withCriteria(max:10, offset: 10){
             if(params.nome){
                 ilike "nome", "%${params.nome}%"
             }
-            order "nome","desc"
+            order "nome","asc"
         }
         render resultado as JSON
     }

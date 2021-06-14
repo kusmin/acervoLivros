@@ -2,12 +2,13 @@ package acervolivros
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 
 class AutorController {
 
     AutorService autorService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", buscar: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -20,6 +21,25 @@ class AutorController {
 
     def create() {
         respond new Autor(params)
+    }
+
+    def buscar(){
+        if(!params.nome && !params.bibliografia){
+            def error = ["Erro": "Escolha uma opção de busca"]
+            render error as JSON
+            return
+        }
+
+        def resultado = Autor.withCriteria(max:10, offset: 10){
+            if(params.nome){
+                ilike "nome","%${params.nome}%"
+            }
+            if(params.bibliografia){
+                ilike "bibliografia","%${params.bibliografia}%"
+            }
+            order "nome", "asc"
+        }
+        render resultado as JSON
     }
 
     // def upload() {
@@ -42,6 +62,8 @@ class AutorController {
 
         try {
             autorService.save(autor)
+            response.status = 201
+            
         } catch (ValidationException e) {
             respond autor.errors, view:'create'
             return
@@ -81,6 +103,7 @@ class AutorController {
             '*'{ respond autor, [status: OK] }
         }
     }
+
 
     def delete(Long id) {
         if (id == null) {
