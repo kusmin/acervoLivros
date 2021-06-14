@@ -1,0 +1,37 @@
+@startuml
+
+class Categoria {
+    nome: String
+}
+
+class Livro {
+    categoria: Categoria
+    autor:Autor
+    titulo: String
+    descricao: String
+    codigo: int
+    dataCadastro: Date
+    foto: byte 
+}
+
+class Emprestimo{
+    usuario:Usuario
+    dataEmprestimo: Date
+    dataDevolucao: Date
+    livros: Livros
+}
+
+class Autor{
+    nome: String
+    descricao: String
+}
+
+class Usuario {
+    nome: String
+}
+
+Livro --> Categoria
+Emprestimo --> Livros
+Livro --> Autor
+Emprestimo --> Usuario
+@enduml

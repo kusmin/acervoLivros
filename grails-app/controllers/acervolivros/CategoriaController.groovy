@@ -2,6 +2,7 @@ package acervolivros
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 
 class CategoriaController {
 
@@ -20,6 +21,17 @@ class CategoriaController {
 
     def create() {
         respond new Categoria(params)
+    }
+
+    def buscar(def params){
+        def busca = Categoria.createCriteria()
+        def resultado - busca.list(max:10, offset: 10){
+            if(params.nome){
+                ilike "nome", "%${params.nome}%"
+            }
+            order "nome","desc"
+        }
+        render resultado as JSON
     }
 
     def save(Categoria categoria) {
