@@ -2,6 +2,8 @@ package acervolivros
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
+import java.time.*
 
 class LivroController {
 
@@ -22,6 +24,51 @@ class LivroController {
     def create() {
         respond new Livro(params)
     }
+
+    def tempoDeCadastro(Long id){
+        def livro = livroService.get(id)
+        def tempoDeCadastro = livro.dataCadastro
+        LocalDate atual = LocalDate.now()
+        Period periodo = Period.between(tempoDeCadastro, atual)
+        def diferenca = ["${livro.titulo}" : periodo.getDays()]
+        render diferenca as JSON
+    }
+
+    def buscar(){
+        if(!params.titulo && !params.descricao && !params.codigo){
+            def error = ["Erro": "Escolha uma opção de busca"]
+            render error as JSON
+            return
+        }
+
+        def resultado = Livro.withCriteria(max:10, offset: 10){
+            if(params.titulo){
+                ilike "titulo","%${params.titulo}%"
+            }
+            if(params.descricao){
+                ilike "descricao","%${params.descricao}%"
+            }
+            if(params.codigo){
+                ilike "codigo","%${params.codigo}%"
+            }
+            order "titulo", "asc"
+        }
+        render resultado as JSON
+    }
+
+    def categoriaPorLivro(){
+        def categoriaPorLivro = Livro.withCriteria(){
+        
+        projections{
+            groupProperty 'categoria.id'
+            count 'categoria'
+            }    
+        
+        }
+
+        render categoriaPorLivro as JSON
+    }
+
 
     def save(Livro livro) {
         if (livro == null) {
@@ -45,7 +92,7 @@ class LivroController {
         }
     }
 
-    def editImage(Long id) {
+    def editImages(Long id) {
     Livro livro = livroDataService.get(id)
     if (!livro) {
         notFound()

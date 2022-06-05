@@ -2,6 +2,9 @@ package acervolivros
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
+import java.time.*
+
 
 class EmprestimoController {
 
@@ -12,6 +15,15 @@ class EmprestimoController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond emprestimoService.list(params), model:[emprestimoCount: emprestimoService.count()]
+    }
+
+    def tempoDeEmprestimo(Long id){
+        def emprestimo = emprestimoService.get(id)
+        def diaPegouEmprestado = emprestimo.dataCadastroEmprestimo
+        LocalDate atual = LocalDate.now()
+        Period periodo = Period.between(diaPegouEmprestado, atual)
+        def diferenca = ["${emprestimo.livro}": periodo.getDays()]
+        render diferenca as JSON
     }
 
     def show(Long id) {

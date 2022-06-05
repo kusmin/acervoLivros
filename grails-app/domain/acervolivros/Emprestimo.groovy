@@ -13,6 +13,6 @@ class Emprestimo {
         usuario nullable:false, blank:false
         livro nullable:false, blank:false
         dataCadastroEmprestimo nullable:false, blank:false
-        dataDevolucao nullable:false, blank:false
+        dataDevolucao nullable:true, blank:true
     }
 }
